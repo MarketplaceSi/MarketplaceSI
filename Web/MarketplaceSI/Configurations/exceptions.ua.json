@@ -1,0 +1,63 @@
+{
+    "ExceptionSettings": {
+      "Items": {
+        "ua": [
+          {
+            "id": 1,
+            "code": "user_already_exists",
+            "message": "Користувач уже існує в базі даних."
+          },
+          {
+            "id": 2,
+            "code": "user_not_exists",
+            "message": "Користувача з цією електронною адресою не знайдено в базі даних."
+          },
+          {
+            "id": 3,
+            "code": "user_not_active",
+            "message": "Користувач не був активований."
+          },
+          {
+            "id": 4,
+            "code": "access_forbidden",
+            "message": "Користувач немає доступу."
+          },
+          {
+            "id": 6,
+            "code": "email_confirmed",
+            "message": "Електронна пошта вже підтверджена!"
+          },
+          {
+            "id": 10,
+            "code": "incorrect_password",
+            "message": "Помилка автентифікації: пароль не відповідає збереженому значенню."
+          },
+          {
+            "id": 11,
+            "code": "password_new_old",
+            "message": "Новий пароль повинен відрізнятись від старого."
+          },
+          {
+            "id": 20,
+            "code": "token_invalid",
+            "message": "Недійсний маркер доступу або маркер оновлення."
+          },
+          {
+            "id": 21,
+            "code": "token_expired",
+            "message": "Термін дії маркер доступу завершився."
+          },
+          {
+            "id" : 30,
+            "code" : "category_not_exists",
+            "message" : "Категорія не існує."
+          },
+          {
+            "id" : 31,
+            "code" : "category_parent_not_exists",
+            "message" : "Батьківська категорія не існує."
+          }
+        ]
+      }
+    }
+  }

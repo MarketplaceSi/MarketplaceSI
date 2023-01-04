@@ -1,0 +1,10 @@
+{
+  "CorsSettings": {
+    "AllowedOrigins": "*",
+    "AllowedMethods": "*",
+    "AllowedHeaders": "*",
+    "ExposedHeaders": "Authorization,Link,X-Total-Count,X-Pagination",
+    "AllowCredentials": true,
+    "MaxAge": 1800
+  }
+}
