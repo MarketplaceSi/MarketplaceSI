@@ -1,0 +1,84 @@
+{
+    "ExceptionSettings": {
+      "Items": {
+        "en": [
+          {
+            "id": 1,
+            "code": "user_already_exists",
+            "message": "User already exists."
+          },
+          {
+            "id": 2,
+            "code": "user_not_exists",
+            "message": "User with this email was not found in the database."
+          },
+          {
+            "id": 3,
+            "code": "user_not_active",
+            "message": "User was not activated."
+          },
+          {
+            "id": 4,
+            "code": "access_forbidden",
+            "message": "User do not have access."
+          },
+          {
+            "id": 6,
+            "code": "email_confirmed",
+            "message": "Email already confirmed!"
+          },
+          {
+            "id": 10,
+            "code": "incorrect_password",
+            "message": "Authentication failed: password does not match stored value."
+          },
+          {
+            "id": 11,
+            "code": "password_new_old",
+            "message": "The new password must be different from the old one."
+          },
+          {
+            "id": 20,
+            "code": "token_invalid",
+            "message": "Invalid access token or refres htoken."
+          },
+          {
+            "id": 21,
+            "code": "token_expired",
+            "message": "The access token has expired."
+          },
+          {
+            "id" : 30,
+            "code" : "category_not_exists",
+            "message" : "Parent category not exists."
+          },
+          {
+            "id" : 31,
+            "code" : "category_parent_not_exists",
+            "message" : "Parent category not exists."
+          },
+
+          {
+            "id" : 100,
+            "code" : "property_empty",
+            "message" : "Property can not be empty."
+          },
+          {
+            "id" : 101,
+            "code" : "email_incorrect",
+            "message" : "Incorrect email formatt."
+          },
+          {
+            "id" : 102,
+            "code" : "password_incorrect",
+            "message" : "Password does not meet the requirements."
+          },
+          {
+            "id" : 103,
+            "code" : "password_length",
+            "message" : "Password does not meet the requirements."
+          }
+        ]
+      }
+    }
+  }

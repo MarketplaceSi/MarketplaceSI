@@ -1,0 +1,7 @@
+{
+    "HashingSettings": {
+        "Iterations": 10000,
+        "SaltSize": 16,
+        "KeySize": 32
+    }
+}
