@@ -9,8 +9,12 @@
 *.user
 *.userosscache
 *.sln.docstates
+
+# Ignore env json settings
 appsettings.Development.json
 appsettings.Docker.json
+
+environment/postgres-data/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
