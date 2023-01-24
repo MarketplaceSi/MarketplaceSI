@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Kernel\Kernel.csproj" />
+    <ProjectReference Include="..\..\Core\Migrations\Migrations.csproj" />
   </ItemGroup>
 
   <ItemGroup>
