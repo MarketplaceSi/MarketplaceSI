@@ -1,14 +1,15 @@
 ﻿using Kernel.Extensions;
 using MarketplaceSI.Web.Api.Graphql.Errors;
 using MarketplaceSI.Web.Api.Graphql.Queries;
-using AppAny.HotChocolate.FluentValidation;
 using Microsoft.Extensions.Options;
 using HotChocolate.Data.Filters;
 using HotChocolate.Data.Filters.Expressions;
 using MarketplaceSI.Core.Domain.Settings;
-using MarketplaceSI.Graphql.Mutations;
-using Microsoft.Extensions.DependencyInjection;
 using MarketplaceSI.Web.Api.Graphql.Filters;
+using MarketplaceSI.Graphql.Mutations;
+using AppAny.HotChocolate.FluentValidation;
+using MarketplaceSI.Core.Infrastructure.Exceptions;
+using MarketplaceSI.Web.Api.Graphql.ObjectTypes;
 
 namespace MarketplaceSI.Extensions
 {
@@ -57,9 +58,9 @@ namespace MarketplaceSI.Extensions
                             : t
                     )
                 .AddAuthorization()
-                    //.AddType<UserType>()
-                    //.AddType<ProductType>()
-                    //.AddType<ProductReviewType>()
+                    .AddType<UserType>()
+                //.AddType<ProductType>()
+                //.AddType<ProductReviewType>()
                 .AddQueryType(q => q.Name(OperationTypeNames.Query))
                     .AddTypeExtension<UserQueries>()
                 //    .AddTypeExtension<CategoryQueries>()
@@ -84,14 +85,26 @@ namespace MarketplaceSI.Extensions
                 //    .AddTypeExtension<AddressMutation>()
 
                 //.AddSubscriptionType<UserSubscription>()
+                //.AddInMemorySubscriptions()
                 .AddDataLoaders()
-                .AddInMemorySubscriptions()
                 .AddErrorFilter<GraphQLErrorFilter>(c => {
                     var context = c.GetRequiredService<IHttpContextAccessor>();
                     var opt = c.GetRequiredService<IOptions<ExceptionSettings>>();
                     return new GraphQLErrorFilter(opt, context);
                 })
                 .AddProjections()
+                .AddFluentValidation(o =>
+                {
+                    o.UseDefaultErrorMapperWithDetails((builder, context) =>
+                    {
+                        builder.SetException(
+                            new ValidationException(
+                                context.ValidationFailure.ErrorMessage,
+                                context.ValidationFailure.ErrorCode,
+                                context.ValidationFailure.PropertyName));
+                    });
+                    //o.UseDefaultErrorMapperWithDetails();
+                })
                 .InitializeOnStartup();
             return services;
         }
