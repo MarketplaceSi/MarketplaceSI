@@ -1,15 +1,15 @@
 ﻿using Domain.Repositories.DataLoaders;
-using MarketplaceSI.Core.Domain.Entities;
-using MarketplaceSI.Core.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Http;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace Kernel.Users.Queries
 {
+
     public class UserQueryHandler : IRequestHandler<UserQuery, User>
     {
         private readonly IUserByIdDataLoader _userLoader;
         private readonly IHttpContextAccessor _context;
+
         public UserQueryHandler(IUserByIdDataLoader userLoader, IHttpContextAccessor contextAccessor)
         {
             _userLoader = userLoader;

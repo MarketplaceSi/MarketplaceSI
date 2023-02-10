@@ -15,3 +15,4 @@ public class AccountMutations
         return await mediator.Send(input, cancellationToken);
     }
 }
+

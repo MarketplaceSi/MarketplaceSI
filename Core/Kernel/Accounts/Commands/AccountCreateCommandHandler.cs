@@ -1,7 +1,4 @@
-﻿using MarketplaceSI.Core.Domain.Entities;
-using MarketplaceSI.Core.Domain.Security.Interfaces;
-using MarketplaceSI.Core.Domain.Services.Interfaces;
-using MarketplaceSI.Core.Domain.Settings;
+﻿using MarketplaceSI.Core.Domain.Settings;
 using MarketplaceSI.Core.Dto.Emails;
 using MarketplaceSI.Core.Dto.Emails.TemplateData;
 using MarketplaceSI.Core.Dto.Enums;
@@ -12,17 +9,14 @@ namespace MarketplaceSI.Core.Kernel.Account.Commands;
 public class AccountCreateCommandHandler : IRequestHandler<AccountCreateCommand, AccountPayloadBase>
 {
     private readonly IUserService _userService;
-    private readonly ITokenProvider _tokenProvider;
     private readonly IMailSenderService _sender;
     private readonly UrlsSettings _settings;
 
     public AccountCreateCommandHandler(IUserService userService,
-        ITokenProvider tokenProvider,
         IMailSenderService sender,
         IOptions<UrlsSettings> options)
     {
         _userService = userService;
-        _tokenProvider = tokenProvider;
         _sender = sender;
         _settings = options.Value;
     }

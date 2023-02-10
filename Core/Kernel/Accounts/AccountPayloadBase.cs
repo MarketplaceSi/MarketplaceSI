@@ -1,7 +1,4 @@
-﻿using MarketplaceSI.Core.Domain.Entities;
-using MarketplaceSI.Core.Dto.Generic;
-
-namespace MarketplaceSI.Core.Kernel.Account;
+﻿namespace MarketplaceSI.Core.Kernel.Account;
 
 public class AccountPayloadBase : Payload
 {

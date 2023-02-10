@@ -1,15 +1,15 @@
 ﻿using Kernel.Extensions;
+using MarketplaceSI.Graphql.Mutations;
 using MarketplaceSI.Web.Api.Graphql.Errors;
+using MarketplaceSI.Web.Api.Graphql.ObjectTypes;
 using MarketplaceSI.Web.Api.Graphql.Queries;
 using Microsoft.Extensions.Options;
 using HotChocolate.Data.Filters;
 using HotChocolate.Data.Filters.Expressions;
 using MarketplaceSI.Core.Domain.Settings;
 using MarketplaceSI.Web.Api.Graphql.Filters;
-using MarketplaceSI.Graphql.Mutations;
 using AppAny.HotChocolate.FluentValidation;
 using MarketplaceSI.Core.Infrastructure.Exceptions;
-using MarketplaceSI.Web.Api.Graphql.ObjectTypes;
 
 namespace MarketplaceSI.Extensions
 {
@@ -61,6 +61,8 @@ namespace MarketplaceSI.Extensions
                     .AddType<UserType>()
                 //.AddType<ProductType>()
                 //.AddType<ProductReviewType>()
+                .AddAuthorization()
+                    .AddType<UserType>()
                 .AddQueryType(q => q.Name(OperationTypeNames.Query))
                     .AddTypeExtension<UserQueries>()
                 //    .AddTypeExtension<CategoryQueries>()
@@ -106,6 +108,7 @@ namespace MarketplaceSI.Extensions
                     //o.UseDefaultErrorMapperWithDetails();
                 })
                 .InitializeOnStartup();
+
             return services;
         }
     }

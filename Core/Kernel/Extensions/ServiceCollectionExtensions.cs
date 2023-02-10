@@ -14,15 +14,14 @@ using Microsoft.IdentityModel.Tokens;
 using Scrutor;
 using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
-using MarketplaceSI.Core.Domain.Entities;
 using MarketplaceSI.Core.Infrastructure.Repositories;
 using MarketplaceSI.Core.Domain.Security.Interfaces;
 using MarketplaceSI.Core.Infrastructure.Security;
 using MarketplaceSI.Core.Infrastructure.Services;
-using Domain.Repositories.DataLoaders;
 using HotChocolate.Execution.Configuration;
-using Infrastructure.Repositories.DataLoaders;
 using FluentValidation;
+using Infrastructure.Repositories.DataLoaders;
+using Domain.Repositories.DataLoaders;
 
 namespace Kernel.Extensions
 {
@@ -181,6 +180,13 @@ namespace Kernel.Extensions
 
             return services;
         }
+        //public static IRequestExecutorBuilder AddDataLoaders(this IRequestExecutorBuilder builder)
+        //{
+        //    builder
+        //    .AddDataLoader<IUserByIdDataLoader, UserByIdDataLoader>();
+
+        //    return builder;
+        //}
     }
 
 }

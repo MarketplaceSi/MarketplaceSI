@@ -1,8 +1,8 @@
-﻿using Domain.Repositories.DataLoaders;
 using GreenDonut;
+using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data;
 using MarketplaceSI.Core.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+using Domain.Repositories.DataLoaders;
 
 namespace Infrastructure.Repositories.DataLoaders
 {

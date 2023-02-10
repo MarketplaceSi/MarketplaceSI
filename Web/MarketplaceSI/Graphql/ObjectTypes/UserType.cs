@@ -1,5 +1,4 @@
 using MarketplaceSI.Core.Domain.Entities;
-using MarketplaceSI.Core.Domain.Repositories.Interfaces;
 
 namespace MarketplaceSI.Web.Api.Graphql.ObjectTypes;
 
@@ -22,6 +21,7 @@ public class UserType : ObjectType<User>
             .Ignore(f => f.ActivationKey)
             .Ignore(f => f.ConcurrencyStamp)
             .Ignore(f => f.EmailConfirmed)
+            //.Ignore(f => f.Favorites)
             .Ignore(f => f.LockoutEnabled)
             .Ignore(f => f.LockoutEnd)
             .Ignore(f => f.PasswordHash)
