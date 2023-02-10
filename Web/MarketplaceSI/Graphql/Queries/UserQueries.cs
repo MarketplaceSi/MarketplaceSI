@@ -1,5 +1,5 @@
-﻿using MarketplaceSI.Core.Domain.Entities;
-using MarketplaceSI.Core.Kernel.Users.Queries;
+﻿using Kernel.Users.Queries;
+using MarketplaceSI.Core.Domain.Entities;
 using MediatR;
 
 namespace MarketplaceSI.Web.Api.Graphql.Queries;

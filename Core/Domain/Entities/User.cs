@@ -47,6 +47,7 @@ public class User : IdentityUser<Guid>, IAuditedEntityBase
     public bool IsDeleated { get; set; }
     public string DealitedReason { get; set; } = string.Empty;
     public DateTime? DealetedAt { get; set; } = default!;
+    public virtual ICollection<Address> Addresses { get; set; } = default!;
 
     public override string ToString()
     {

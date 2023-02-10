@@ -1,5 +1,2 @@
-﻿
-
-namespace MarketplaceSI.Core.Kernel.Users.Queries;
-
-public record UserQuery(Guid? Id) : IRequest<User>;
+﻿namespace Kernel.Users.Queries;
+    public record UserQuery(Guid? Id) : IRequest<User>;

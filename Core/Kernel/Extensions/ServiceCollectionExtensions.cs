@@ -14,16 +14,14 @@ using Microsoft.IdentityModel.Tokens;
 using Scrutor;
 using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
-using FluentValidation;
-using MarketplaceSI.Core.Domain.Entities;
-using MarketplaceSI.Core.Domain.Repositories.Interfaces;
 using MarketplaceSI.Core.Infrastructure.Repositories;
 using MarketplaceSI.Core.Domain.Security.Interfaces;
-using MarketplaceSI.Core.Domain.Services.Interfaces;
 using MarketplaceSI.Core.Infrastructure.Security;
 using MarketplaceSI.Core.Infrastructure.Services;
 using HotChocolate.Execution.Configuration;
-using MarketplaceSI.Core.Domain.Repositories.DataLoaders;
+using FluentValidation;
+using Infrastructure.Repositories.DataLoaders;
+using Domain.Repositories.DataLoaders;
 
 namespace Kernel.Extensions
 {
@@ -44,7 +42,8 @@ namespace Kernel.Extensions
                 .AddRepositories()
                 .AddServices()
                 .AddScoped<ExceptionMiddleware>()
-                .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+                .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly())
+                .AddValidatorsFromAssembly(Assembly.GetEntryAssembly());
 
         public static IServiceCollection AddAppSettings(this IServiceCollection services, IConfiguration configuration) => services
         .Configure<SecuritySettings>(configuration.GetSection(nameof(SecuritySettings)))
@@ -69,6 +68,15 @@ namespace Kernel.Extensions
             services.AddScoped<AppDbContext>(p => p.GetRequiredService<IDbContextFactory<AppDbContext>>().CreateDbContext());
 
             return services;
+        }
+        public static IRequestExecutorBuilder AddDataLoaders(this IRequestExecutorBuilder builder)
+        {
+            builder
+            .AddDataLoader<IUserByIdDataLoader, UserByIdDataLoader>();
+            //.AddDataLoader<IProductByIdDataLoader, ProductByIdDataLoader>()
+            //.AddDataLoader<ICategoryByIdDataLoader, CategoryByIdDataLoader>();
+
+            return builder;
         }
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
@@ -172,13 +180,13 @@ namespace Kernel.Extensions
 
             return services;
         }
-        public static IRequestExecutorBuilder AddDataLoaders(this IRequestExecutorBuilder builder)
-        {
-            builder
-            .AddDataLoader<IUserByIdDataLoader, UserByIdDataLoader>();
+        //public static IRequestExecutorBuilder AddDataLoaders(this IRequestExecutorBuilder builder)
+        //{
+        //    builder
+        //    .AddDataLoader<IUserByIdDataLoader, UserByIdDataLoader>();
 
-            return builder;
-        }
+        //    return builder;
+        //}
     }
 
 }

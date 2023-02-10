@@ -1,5 +1,3 @@
-
-
 using MarketplaceSI.Core.Domain.Entities;
 
 namespace MarketplaceSI.Web.Api.Graphql.ObjectTypes;
@@ -32,5 +30,17 @@ public class UserType : ObjectType<User>
             .Ignore(f => f.SecurityStamp)
             .Ignore(f => f.TwoFactorEnabled)
             .Ignore(f => f.UserRoles);
+        descriptor
+            .Field("fullName")
+            .Resolve(context =>
+            {
+                return $"{context.Parent<User>().FirstName} {context.Parent<User>().LastName}";
+            });
+        descriptor
+            .Field("address")
+            .Resolve(context =>
+            {
+                return context.Parent<User>()?.Addresses?.FirstOrDefault(a => a.IsDefault);
+            });
     }
 }

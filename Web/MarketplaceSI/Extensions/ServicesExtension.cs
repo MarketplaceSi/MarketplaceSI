@@ -1,9 +1,15 @@
 ﻿using Kernel.Extensions;
-using MarketplaceSI.Core.Domain.Repositories.DataLoaders;
 using MarketplaceSI.Graphql.Mutations;
 using MarketplaceSI.Web.Api.Graphql.Errors;
 using MarketplaceSI.Web.Api.Graphql.ObjectTypes;
 using MarketplaceSI.Web.Api.Graphql.Queries;
+using Microsoft.Extensions.Options;
+using HotChocolate.Data.Filters;
+using HotChocolate.Data.Filters.Expressions;
+using MarketplaceSI.Core.Domain.Settings;
+using MarketplaceSI.Web.Api.Graphql.Filters;
+using AppAny.HotChocolate.FluentValidation;
+using MarketplaceSI.Core.Infrastructure.Exceptions;
 
 namespace MarketplaceSI.Extensions
 {
@@ -42,13 +48,65 @@ namespace MarketplaceSI.Extensions
 
             services
                 .AddGraphQLServer()
+                .BindRuntimeType<Guid, IdType>()
+                .BindRuntimeType<DateTime, DateType>()
+                .BindRuntimeType<decimal, DecimalType>()
+                .AddTypeConverter<DateTimeOffset, DateTime>(t => t.UtcDateTime)
+                .AddTypeConverter<DateTime, DateTimeOffset>(
+                        t => t.Kind is DateTimeKind.Unspecified
+                            ? DateTime.SpecifyKind(t, DateTimeKind.Utc)
+                            : t
+                    )
+                .AddAuthorization()
+                    .AddType<UserType>()
+                //.AddType<ProductType>()
+                //.AddType<ProductReviewType>()
                 .AddAuthorization()
                     .AddType<UserType>()
                 .AddQueryType(q => q.Name(OperationTypeNames.Query))
                     .AddTypeExtension<UserQueries>()
-                .AddMutationType(m => m.Name(OperationTypeNames.Mutation))
-                .AddType<AccountMutations>()
-                .AddDataLoader<IUserByIdDataLoader, UserByIdDataLoader>()
+                //    .AddTypeExtension<CategoryQueries>()
+                //    .AddTypeExtension<ProductQueries>()
+                //    .AddTypeExtension<FavoriteQueries>()
+                //    .AddTypeExtension<ReviewQueries>()
+                //    .AddType<ProductCreateCommandType>()
+                .AddFiltering<CustomFilteringConvention>()
+                .AddConvention<IFilterConvention>(
+                        new FilterConventionExtension(
+                            x => x.AddProviderExtension(
+                                new QueryableFilterProviderExtension(
+                                    y => y.AddFieldHandler<QueryableStringInvariantContainsHandler>()))))
+                .AddSorting()
+                .AddMutationType(q => q.Name(OperationTypeNames.Mutation))
+                    .AddTypeExtension<AccountMutations>()
+                //    .AddTypeExtension<CategoryMutations>()
+                //    .AddTypeExtension<ProductMutations>()
+                //    .AddTypeExtension<FavoriteMutations>()
+                //    .AddTypeExtension<UserMutations>()
+                //    .AddTypeExtension<ReviewMutations>()
+                //    .AddTypeExtension<AddressMutation>()
+
+                //.AddSubscriptionType<UserSubscription>()
+                //.AddInMemorySubscriptions()
+                .AddDataLoaders()
+                .AddErrorFilter<GraphQLErrorFilter>(c => {
+                    var context = c.GetRequiredService<IHttpContextAccessor>();
+                    var opt = c.GetRequiredService<IOptions<ExceptionSettings>>();
+                    return new GraphQLErrorFilter(opt, context);
+                })
+                .AddProjections()
+                .AddFluentValidation(o =>
+                {
+                    o.UseDefaultErrorMapperWithDetails((builder, context) =>
+                    {
+                        builder.SetException(
+                            new ValidationException(
+                                context.ValidationFailure.ErrorMessage,
+                                context.ValidationFailure.ErrorCode,
+                                context.ValidationFailure.PropertyName));
+                    });
+                    //o.UseDefaultErrorMapperWithDetails();
+                })
                 .InitializeOnStartup();
 
             return services;

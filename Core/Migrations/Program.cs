@@ -1,7 +1,6 @@
 ﻿using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Reflection;
 
 Console.WriteLine("Configuration migration startup.");
@@ -38,6 +37,5 @@ try
 }
 catch (Exception ex)
 {
-
     Console.WriteLine("> Failed to start Migration: {0}", ex.Message);
 }
