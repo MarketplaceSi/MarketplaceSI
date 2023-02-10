@@ -1,4 +1,8 @@
-﻿namespace MarketplaceSI.Web.Api.Graphql.Queries;
+﻿using MarketplaceSI.Core.Domain.Entities;
+using MarketplaceSI.Core.Kernel.Users.Queries;
+using MediatR;
+
+namespace MarketplaceSI.Web.Api.Graphql.Queries;
 
 [ExtendObjectType(OperationTypeNames.Query)]
 public class UserQueries
@@ -15,12 +19,12 @@ public class UserQueries
     //    return (await mediator.Send(new UsersListQuery(), cancellationToken));
     //}
 
-    //public async Task<User> UserById(Guid? input,
-    //    [Service] IMediator mediator,
-    //    CancellationToken cancellationToken)
-    //{
-    //    return await mediator.Send(new UserQuery(input), cancellationToken);
-    //}
+    public async Task<User> UserById(Guid? input,
+        [Service] IMediator mediator,
+        CancellationToken cancellationToken)
+    {
+        return await mediator.Send(new UserQuery(input), cancellationToken);
+    }
 
     //[Authorize]
     //[UsePaging]

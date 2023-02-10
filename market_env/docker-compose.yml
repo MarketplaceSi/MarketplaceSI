@@ -2,14 +2,13 @@ version: '3.5'
 
 services:
   db:
-    container_name: market_si
+    container_name: marketsi_db
     image: postgres:14
     restart: always
     environment:
-      name: marketSi
       POSTGRES_USER: "admin"
       POSTGRES_PASSWORD: "Qwerty1234"
-      POSTGRES_DB: "market_si"
+      POSTGRES_DB: "marketsi"
     ports: 
       - "5437:5432"
     volumes:
@@ -19,5 +18,5 @@ services:
 
 networks:
   default:
-    name: si_market
+    name: marketsi_storage
     driver: bridge

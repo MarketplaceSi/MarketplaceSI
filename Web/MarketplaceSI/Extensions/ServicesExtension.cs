@@ -1,4 +1,8 @@
-﻿using MarketplaceSI.Web.Api.Graphql.Errors;
+﻿using Kernel.Extensions;
+using MarketplaceSI.Core.Domain.Repositories.DataLoaders;
+using MarketplaceSI.Graphql.Mutations;
+using MarketplaceSI.Web.Api.Graphql.Errors;
+using MarketplaceSI.Web.Api.Graphql.ObjectTypes;
 using MarketplaceSI.Web.Api.Graphql.Queries;
 
 namespace MarketplaceSI.Extensions
@@ -38,8 +42,15 @@ namespace MarketplaceSI.Extensions
 
             services
                 .AddGraphQLServer()
+                .AddAuthorization()
+                    .AddType<UserType>()
                 .AddQueryType(q => q.Name(OperationTypeNames.Query))
-                    .AddTypeExtension<UserQueries>();
+                    .AddTypeExtension<UserQueries>()
+                .AddMutationType(m => m.Name(OperationTypeNames.Mutation))
+                .AddType<AccountMutations>()
+                .AddDataLoader<IUserByIdDataLoader, UserByIdDataLoader>()
+                .InitializeOnStartup();
+
             return services;
         }
     }

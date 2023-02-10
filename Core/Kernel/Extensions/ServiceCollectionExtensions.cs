@@ -22,6 +22,8 @@ using MarketplaceSI.Core.Domain.Security.Interfaces;
 using MarketplaceSI.Core.Domain.Services.Interfaces;
 using MarketplaceSI.Core.Infrastructure.Security;
 using MarketplaceSI.Core.Infrastructure.Services;
+using HotChocolate.Execution.Configuration;
+using MarketplaceSI.Core.Domain.Repositories.DataLoaders;
 
 namespace Kernel.Extensions
 {
@@ -169,6 +171,13 @@ namespace Kernel.Extensions
 
 
             return services;
+        }
+        public static IRequestExecutorBuilder AddDataLoaders(this IRequestExecutorBuilder builder)
+        {
+            builder
+            .AddDataLoader<IUserByIdDataLoader, UserByIdDataLoader>();
+
+            return builder;
         }
     }
 
