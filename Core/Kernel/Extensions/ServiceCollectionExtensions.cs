@@ -22,6 +22,7 @@ using HotChocolate.Execution.Configuration;
 using FluentValidation;
 using Domain.Repositories.DataLoaders;
 using MarketplaceSI.Core.Infrastructure.Repositories.DataLoaders;
+using Domain.Settings;
 
 namespace Kernel.Extensions
 {
@@ -46,12 +47,13 @@ namespace Kernel.Extensions
                 .AddValidatorsFromAssembly(Assembly.GetEntryAssembly());
 
         public static IServiceCollection AddAppSettings(this IServiceCollection services, IConfiguration configuration) => services
-        .Configure<SecuritySettings>(configuration.GetSection(nameof(SecuritySettings)))
-        .Configure<ExceptionSettings>(configuration.GetSection(nameof(ExceptionSettings)))
-        .Configure<CorsSettings>(configuration.GetSection(nameof(CorsSettings)))
-        .Configure<HashingSettings>(configuration.GetSection(nameof(HashingSettings)))
-        .Configure<UrlsSettings>(configuration.GetSection(nameof(UrlsSettings)))
-        .Configure<SendGridSettings>(configuration.GetSection(nameof(SendGridSettings)));
+            .Configure<SecuritySettings>(configuration.GetSection(nameof(SecuritySettings)))
+            .Configure<ExceptionSettings>(configuration.GetSection(nameof(ExceptionSettings)))
+            .Configure<CorsSettings>(configuration.GetSection(nameof(CorsSettings)))
+            .Configure<HashingSettings>(configuration.GetSection(nameof(HashingSettings)))
+            .Configure<UrlsSettings>(configuration.GetSection(nameof(UrlsSettings)))
+            .Configure<SendGridSettings>(configuration.GetSection(nameof(SendGridSettings)))
+            .Configure<AmazonSettings>(configuration.GetSection(nameof(AmazonSettings)));
 
         public static IServiceCollection AddAutomapper(this IServiceCollection services) => services.AddAutoMapper(typeof(ServiceCollectionExtensions));
         //TODO: Different type of databses

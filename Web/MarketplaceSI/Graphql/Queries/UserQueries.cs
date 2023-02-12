@@ -8,12 +8,12 @@ namespace MarketplaceSI.Web.Api.Graphql.Queries;
 [ExtendObjectType(OperationTypeNames.Query)]
 public class UserQueries
 {
-    //[Authorize]
-    //[UseOffsetPaging]
-    //[UseProjection]
-    //[UseFiltering]
-    //[UseSorting]
-    // [UseFiltering(typeof(SessionFilterInputType))]
+    [Authorize]
+    [UseOffsetPaging]
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    
     public async Task<IQueryable<User>?> UsersList(
         [Service] IMediator mediator,
         CancellationToken cancellationToken)
@@ -28,12 +28,12 @@ public class UserQueries
         return await mediator.Send(new UserQuery(input), cancellationToken);
     }
 
-    //[Authorize]
-    //[UsePaging]
-    //public async Task<IQueryable<Address>?> AddressesListAsync(
-    //    [Service] IMediator mediator,
-    //    CancellationToken cancellationToken)
-    //{
-    //    return await mediator.Send(new UserAddressListQuery(), cancellationToken);
-    //}
+    [Authorize]
+    [UseOffsetPaging]
+    public async Task<IQueryable<Address>?> AddressesListAsync(
+        [Service] IMediator mediator,
+        CancellationToken cancellationToken)
+    {
+        return await mediator.Send(new UserAddressListQuery(), cancellationToken);
+    }
 }

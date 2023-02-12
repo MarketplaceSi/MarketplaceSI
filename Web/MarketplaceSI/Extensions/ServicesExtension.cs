@@ -70,6 +70,7 @@ namespace MarketplaceSI.Extensions
                 //    .AddTypeExtension<ReviewQueries>()
                 //    .AddType<ProductCreateCommandType>()
                 .AddFiltering<CustomFilteringConvention>()
+                .AddType<UploadType>()
                 .AddConvention<IFilterConvention>(
                         new FilterConventionExtension(
                             x => x.AddProviderExtension(
@@ -81,13 +82,13 @@ namespace MarketplaceSI.Extensions
                 //    .AddTypeExtension<CategoryMutations>()
                 //    .AddTypeExtension<ProductMutations>()
                 //    .AddTypeExtension<FavoriteMutations>()
-                //    .AddTypeExtension<UserMutations>()
+                    .AddTypeExtension<UserMutations>()
                 //    .AddTypeExtension<ReviewMutations>()
                 //    .AddTypeExtension<AddressMutation>()
 
                 .AddSubscriptionType<UserSubscription>()
                 .AddDataLoaders()
-                //.AddInMemorySubscriptions()                
+                .AddInMemorySubscriptions()                
                 .AddErrorFilter<GraphQLErrorFilter>(c => {
                     var context = c.GetRequiredService<IHttpContextAccessor>();
                     var opt = c.GetRequiredService<IOptions<ExceptionSettings>>();

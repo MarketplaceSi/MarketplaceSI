@@ -63,5 +63,9 @@ public class User : IdentityUser<Guid>, IAuditedEntityBase
                $", ActivationKey='{ActivationKey}'" +
                "}";
     }
+    public string GetPath()
+    {
+        return $"UsersAvatar/{Id}/";
+    }
 
 }
