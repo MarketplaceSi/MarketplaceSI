@@ -10,6 +10,7 @@ using MarketplaceSI.Core.Domain.Settings;
 using MarketplaceSI.Web.Api.Graphql.Filters;
 using AppAny.HotChocolate.FluentValidation;
 using MarketplaceSI.Core.Infrastructure.Exceptions;
+using MarketplaceSI.Graphql.Subscriptions;
 
 namespace MarketplaceSI.Extensions
 {
@@ -61,8 +62,6 @@ namespace MarketplaceSI.Extensions
                     .AddType<UserType>()
                 //.AddType<ProductType>()
                 //.AddType<ProductReviewType>()
-                .AddAuthorization()
-                    .AddType<UserType>()
                 .AddQueryType(q => q.Name(OperationTypeNames.Query))
                     .AddTypeExtension<UserQueries>()
                 //    .AddTypeExtension<CategoryQueries>()
@@ -86,9 +85,9 @@ namespace MarketplaceSI.Extensions
                 //    .AddTypeExtension<ReviewMutations>()
                 //    .AddTypeExtension<AddressMutation>()
 
-                //.AddSubscriptionType<UserSubscription>()
-                //.AddInMemorySubscriptions()
+                .AddSubscriptionType<UserSubscription>()
                 .AddDataLoaders()
+                //.AddInMemorySubscriptions()                
                 .AddErrorFilter<GraphQLErrorFilter>(c => {
                     var context = c.GetRequiredService<IHttpContextAccessor>();
                     var opt = c.GetRequiredService<IOptions<ExceptionSettings>>();

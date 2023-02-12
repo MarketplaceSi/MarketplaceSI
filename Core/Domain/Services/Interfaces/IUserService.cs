@@ -19,4 +19,5 @@ public interface IUserService
     Task<User?> GetUserAsync();
     Task<bool> VerifyUserEmail(string email, string verifikationKey);
     Task<User?> GetUserById(Guid id);
+    Task<User> LoginAsync(string email, string password);
 }

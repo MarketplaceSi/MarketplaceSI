@@ -4,7 +4,7 @@ using Infrastructure.Data;
 using MarketplaceSI.Core.Domain.Entities;
 using Domain.Repositories.DataLoaders;
 
-namespace Infrastructure.Repositories.DataLoaders
+namespace MarketplaceSI.Core.Infrastructure.Repositories.DataLoaders
 {
     public class UserByIdDataLoader : BatchDataLoader<Guid, User>, IUserByIdDataLoader
     {

@@ -20,8 +20,8 @@ using MarketplaceSI.Core.Infrastructure.Security;
 using MarketplaceSI.Core.Infrastructure.Services;
 using HotChocolate.Execution.Configuration;
 using FluentValidation;
-using Infrastructure.Repositories.DataLoaders;
 using Domain.Repositories.DataLoaders;
+using MarketplaceSI.Core.Infrastructure.Repositories.DataLoaders;
 
 namespace Kernel.Extensions
 {
@@ -180,13 +180,6 @@ namespace Kernel.Extensions
 
             return services;
         }
-        //public static IRequestExecutorBuilder AddDataLoaders(this IRequestExecutorBuilder builder)
-        //{
-        //    builder
-        //    .AddDataLoader<IUserByIdDataLoader, UserByIdDataLoader>();
-
-        //    return builder;
-        //}
     }
 
 }

@@ -1,4 +1,5 @@
-﻿using Kernel.Users.Queries;
+﻿using HotChocolate.AspNetCore.Authorization;
+using Kernel.Users.Queries;
 using MarketplaceSI.Core.Domain.Entities;
 using MediatR;
 
@@ -8,16 +9,17 @@ namespace MarketplaceSI.Web.Api.Graphql.Queries;
 public class UserQueries
 {
     //[Authorize]
-    //[UsePaging]
+    //[UseOffsetPaging]
+    //[UseProjection]
     //[UseFiltering]
     //[UseSorting]
-    //// [UseFiltering(typeof(SessionFilterInputType))]
-    //public async Task<IQueryable<User>?> UsersList(
-    //    [Service] IMediator mediator,
-    //    CancellationToken cancellationToken)
-    //{
-    //    return (await mediator.Send(new UsersListQuery(), cancellationToken));
-    //}
+    // [UseFiltering(typeof(SessionFilterInputType))]
+    public async Task<IQueryable<User>?> UsersList(
+        [Service] IMediator mediator,
+        CancellationToken cancellationToken)
+    {
+        return (await mediator.Send(new UsersListQuery(), cancellationToken));
+    }
 
     public async Task<User> UserById(Guid? input,
         [Service] IMediator mediator,
