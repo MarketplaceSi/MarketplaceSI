@@ -7,6 +7,7 @@ using Kernel.Accounts.Commands;
 using MarketplaceSI.Graphql.Subscriptions;
 using MarketplaceSI.Core.Dto.Generic;
 using Kernel.Accounts.Commandsp;
+using HotChocolate.AspNetCore.Authorization;
 
 namespace MarketplaceSI.Graphql.Mutations;
 [ExtendObjectType(OperationTypeNames.Mutation)]
@@ -59,7 +60,7 @@ public class AccountMutations
         return await mediator.Send(input, cancellationToken);
     }
 
-    //[Authorize]
+    [Authorize]
     public async Task<ActionPayload> DeleteAccountAsync(
       AccountDeleteCommand input,
       [Service] IMediator mediator,

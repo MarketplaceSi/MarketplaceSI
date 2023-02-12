@@ -10,7 +10,7 @@ namespace Domain.Entities
         public double Price { get; set; }
         public List<string> Pictures { get; set; } = new List<string>();
         public Guid OwnerId { get; set; }
-        public User Owner { get; set; } = default!;
+        public virtual User Owner { get; set; } = default!;
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdateAt { get; set; }
         public Guid CategoryId { get; set; }
