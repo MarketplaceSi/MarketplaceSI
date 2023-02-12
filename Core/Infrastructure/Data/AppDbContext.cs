@@ -1,4 +1,5 @@
-﻿using MarketplaceSI.Core.Domain.Entities;
+﻿using Domain.Entities;
+using MarketplaceSI.Core.Domain.Entities;
 using MarketplaceSI.Core.Domain.Entities.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -24,6 +25,7 @@ namespace Infrastructure.Data
             _httpContextAccessor = new HttpContextAccessor();
         }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Product> Products { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

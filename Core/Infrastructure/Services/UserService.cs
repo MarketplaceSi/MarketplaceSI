@@ -271,4 +271,28 @@ public class UserService : IUserService
         return true;
     }
     public virtual async Task<User?> GetUserById(Guid id) => await _userManager.Users.FirstAsync(x => x.Id == id);
+    public async Task<User> LoginAsync(string email, string password)
+    {
+        User user;
+        try
+        {
+            user = await _userManager.Users.Include(u => u.Addresses).SingleAsync(x => x.NormalizedEmail == email.ToUpper());
+        }
+        catch (Exception)
+        {
+
+            throw new ApiException("user_not_exists", System.Net.HttpStatusCode.BadRequest);
+        }
+
+        if (!user.Activated)
+        {
+            throw new ApiException("user_not_active", System.Net.HttpStatusCode.BadRequest);
+        }
+
+        if (!await _userManager.CheckPasswordAsync(user, password))
+        {
+            throw new ApiException("incorrect_password", System.Net.HttpStatusCode.BadRequest);
+        }
+        return user;
+    }
 }

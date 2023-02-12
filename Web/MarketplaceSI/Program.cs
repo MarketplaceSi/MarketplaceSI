@@ -44,7 +44,7 @@ try
                     Tool =
                     {
                         //GaTrackingId = "google-analytics-id",
-                        GaTrackingId = "G-2Y04SFDV8F",
+                        GaTrackingId = "G-05J5M57ED2",
                     }
                 });
 
