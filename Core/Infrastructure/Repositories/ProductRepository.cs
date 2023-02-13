@@ -1,7 +1,7 @@
 ﻿using Domain.Entities;
-using Domain.Repositories.Interfaces;
 using Infrastructure.Data;
 using MarketplaceSI.Core.Domain.Repositories.Interfaces;
+using MarketplaceSI.Domain.Repositories.Interfaces;
 
 namespace MarketplaceSI.Core.Infrastructure.Repositories
 {

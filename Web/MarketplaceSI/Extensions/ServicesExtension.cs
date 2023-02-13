@@ -11,6 +11,9 @@ using MarketplaceSI.Web.Api.Graphql.Filters;
 using AppAny.HotChocolate.FluentValidation;
 using MarketplaceSI.Core.Infrastructure.Exceptions;
 using MarketplaceSI.Graphql.Subscriptions;
+using MarketplaceSI.Graphql.Queries;
+using MarketplaceSI.Graphql.ObjectTypes;
+using MarketplaceSI.Graphql.InputTypes;
 
 namespace MarketplaceSI.Extensions
 {
@@ -60,15 +63,17 @@ namespace MarketplaceSI.Extensions
                     )
                 .AddAuthorization()
                     .AddType<UserType>()
-                //.AddType<ProductType>()
-                //.AddType<ProductReviewType>()
+                    .AddType<CategoryType>()
+                    .AddType<ProductType>()
+                    .AddType<ProductCreateCommandType>()
+                    .AddType<ProductReviewType>()
                 .AddQueryType(q => q.Name(OperationTypeNames.Query))
                     .AddTypeExtension<UserQueries>()
-                //    .AddTypeExtension<CategoryQueries>()
-                //    .AddTypeExtension<ProductQueries>()
-                //    .AddTypeExtension<FavoriteQueries>()
-                //    .AddTypeExtension<ReviewQueries>()
-                //    .AddType<ProductCreateCommandType>()
+                    .AddTypeExtension<CategoryQueries>()
+                    .AddTypeExtension<ProductQueries>()
+                    .AddTypeExtension<FavoriteQueries>()
+                    .AddTypeExtension<ReviewQueries>()
+                    
                 .AddFiltering<CustomFilteringConvention>()
                 .AddType<UploadType>()
                 .AddConvention<IFilterConvention>(
@@ -79,12 +84,12 @@ namespace MarketplaceSI.Extensions
                 .AddSorting()
                 .AddMutationType(q => q.Name(OperationTypeNames.Mutation))
                     .AddTypeExtension<AccountMutations>()
-                //    .AddTypeExtension<CategoryMutations>()
-                //    .AddTypeExtension<ProductMutations>()
-                //    .AddTypeExtension<FavoriteMutations>()
+                    .AddTypeExtension<CategoryMutations>()
+                    .AddTypeExtension<ProductMutations>()
+                    .AddTypeExtension<FavoriteMutations>()
                     .AddTypeExtension<UserMutations>()
-                //    .AddTypeExtension<ReviewMutations>()
-                //    .AddTypeExtension<AddressMutation>()
+                    .AddTypeExtension<ReviewMutations>()
+                    .AddTypeExtension<AddressMutation>()
 
                 .AddSubscriptionType<UserSubscription>()
                 .AddDataLoaders()

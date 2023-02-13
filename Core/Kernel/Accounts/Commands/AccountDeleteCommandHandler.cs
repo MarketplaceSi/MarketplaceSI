@@ -1,4 +1,4 @@
-﻿using Domain.Repositories.Interfaces;
+﻿using MarketplaceSI.Domain.Repositories.Interfaces;
 
 namespace Kernel.Accounts.Commands;
 public class AccountDeleteCommandHandler : IRequestHandler<AccountDeleteCommand, ActionPayload>

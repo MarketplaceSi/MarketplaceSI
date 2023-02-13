@@ -1,3 +1,4 @@
+using Domain.Entities;
 using MarketplaceSI.Core.Domain.Entities.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
@@ -38,6 +39,7 @@ public class User : IdentityUser<Guid>, IAuditedEntityBase
 
     [JsonIgnore]
     public virtual ICollection<UserRole> UserRoles { get; set; } = default!;
+    public virtual ICollection<Favorite> Favorites { get; set; } = default!;
 
     public string? RefreshToken { get; set; }
     public DateTime? RefreshTokenExpiry { get; set; }
@@ -47,7 +49,11 @@ public class User : IdentityUser<Guid>, IAuditedEntityBase
     public bool IsDeleated { get; set; }
     public string DealitedReason { get; set; } = string.Empty;
     public DateTime? DealetedAt { get; set; } = default!;
+
     public virtual ICollection<Address> Addresses { get; set; } = default!;
+    public double? Rating { get; set; }
+    public int ReviewsAmount { get; set; } = default;
+    public virtual ICollection<UserReview> Reviews { get; set; } = default!;
 
     public override string ToString()
     {
