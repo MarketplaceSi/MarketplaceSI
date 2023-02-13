@@ -13,5 +13,6 @@ public interface IBaseRepository<TEntity, TKey> : IReadOnlyBaseRepository<TEntit
     bool UpdateRange(params TEntity[] entities);
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     bool AddRange(params TEntity[] entities);
- 
+    bool UpdateRange(IQueryable<TEntity> entities);
+
 }

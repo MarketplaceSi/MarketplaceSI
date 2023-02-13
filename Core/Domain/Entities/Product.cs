@@ -14,14 +14,14 @@ namespace Domain.Entities
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdateAt { get; set; }
         public Guid CategoryId { get; set; }
-        //public Category Category { get; set; } = default!;
+        public virtual Category Category { get; set; } = default!;
         public ProductStatus Status { get; set; }
         public ProductCondition Condition { get; set; }
         public bool IsDeleated { get; set; } = false;
         public double? Rating { get; set; }
         public int ReviewsAmount { get; set; } = default;
-        //public virtual ICollection<Favorite> Favorited { get; set; } = default!;
-        //public virtual ICollection<ProductReview> Reviews { get; set; } = default!;
+        public virtual ICollection<Favorite> Favorited { get; set; } = default!;
+        public virtual ICollection<ProductReview> Reviews { get; set; } = default!;
         public int ViewedCount { get; set; } = 0;
         public string GetPath()
         {

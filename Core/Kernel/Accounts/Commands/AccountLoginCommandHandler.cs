@@ -2,7 +2,7 @@
 using MarketplaceSI.Core.Kernel.Account;
 using Microsoft.AspNetCore.Identity;
 using MarketplaceSI.Core.Domain.Security.Interfaces;
-using Domain.Repositories.Interfaces;
+using MarketplaceSI.Domain.Repositories.Interfaces;
 
 namespace Kernel.Accounts.Commands
 {

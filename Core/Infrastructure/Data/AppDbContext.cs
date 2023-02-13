@@ -26,6 +26,11 @@ namespace Infrastructure.Data
         }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
+        public DbSet<ProductReview> ProductReviews { get; set; }
+        public DbSet<UserReview> UserReviews { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -60,33 +65,33 @@ namespace Infrastructure.Data
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
-            //builder.Entity<User>()
-            //    .HasMany(u => u.Reviews)
-            //    .WithOne(r => r.User)
-            //    .HasForeignKey(r => r.UserId)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<User>()
+                .HasMany(u => u.Reviews)
+                .WithOne(r => r.User)
+                .HasForeignKey(r => r.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            //builder.Entity<Favorite>()
-            //    .HasKey(bc => new { bc.UserId, bc.ProductId });
-            //builder.Entity<Favorite>()
-            //    .HasOne(bc => bc.User)
-            //    .WithMany(b => b.Favorites)
-            //    .HasForeignKey(bc => bc.UserId);
-            //builder.Entity<Favorite>()
-            //    .HasOne(bc => bc.Product)
-            //    .WithMany(c => c.Favorited)
-            //    .HasForeignKey(bc => bc.ProductId);
+            builder.Entity<Favorite>()
+                .HasKey(bc => new { bc.UserId, bc.ProductId });
+            builder.Entity<Favorite>()
+                .HasOne(bc => bc.User)
+                .WithMany(b => b.Favorites)
+                .HasForeignKey(bc => bc.UserId);
+            builder.Entity<Favorite>()
+                .HasOne(bc => bc.Product)
+                .WithMany(c => c.Favorited)
+                .HasForeignKey(bc => bc.ProductId);
 
-            //builder.Entity<ProductReview>()
-            //    .HasOne(pr => pr.Parent)
-            //    .WithMany(pr => pr.Replays)
-            //    .HasForeignKey(pr => pr.ParentId);
+            builder.Entity<ProductReview>()
+                .HasOne(pr => pr.Parent)
+                .WithMany(pr => pr.Replays)
+                .HasForeignKey(pr => pr.ParentId);
 
 
-            //builder.Entity<UserReview>()
-            //    .HasOne(pr => pr.Parent)
-            //    .WithMany(pr => pr.Replays)
-            //    .HasForeignKey(pr => pr.ParentId);
+            builder.Entity<UserReview>()
+                .HasOne(pr => pr.Parent)
+                .WithMany(pr => pr.Replays)
+                .HasForeignKey(pr => pr.ParentId);
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

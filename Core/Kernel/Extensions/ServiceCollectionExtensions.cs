@@ -23,6 +23,7 @@ using FluentValidation;
 using Domain.Repositories.DataLoaders;
 using MarketplaceSI.Core.Infrastructure.Repositories.DataLoaders;
 using Domain.Settings;
+using Infrastructure.Repositories.DataLoaders;
 
 namespace Kernel.Extensions
 {
@@ -74,9 +75,11 @@ namespace Kernel.Extensions
         public static IRequestExecutorBuilder AddDataLoaders(this IRequestExecutorBuilder builder)
         {
             builder
-            .AddDataLoader<IUserByIdDataLoader, UserByIdDataLoader>();
-            //.AddDataLoader<IProductByIdDataLoader, ProductByIdDataLoader>()
-            //.AddDataLoader<ICategoryByIdDataLoader, CategoryByIdDataLoader>();
+            .AddDataLoader<IUserByIdDataLoader, UserByIdDataLoader>()
+            .AddDataLoader<ICategoryByIdDataLoader, CategoryByIdDataLoader>()
+            .AddDataLoader<IProductByIdDataLoader, ProductByIdDataLoader>()
+            .AddDataLoader<IReviewByIdDataLoader, ReviewByIdDataLoader>();
+
 
             return builder;
         }
